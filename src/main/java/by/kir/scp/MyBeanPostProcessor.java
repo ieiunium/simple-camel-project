@@ -111,13 +111,14 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
 //            String
 //                url =
 //                "file:/home/kiryl_chepeleu/.m2/repository/org/springframework/spring-core/3.2.12.RELEASE/spring-core-3.2.12.RELEASE.jar";
-//            URLClassLoader urlClassLoader = new URLClassLoader(new URL[]{new URL(
-//                url)}, ClassLoader.getSystemClassLoader());
+//            URLClassLoader
+//                urlClassLoader = new URLClassLoader(new URL[]{new URL(url)}, ClassLoader.getSystemClassLoader());
 //            Class<Enhancer>
 //                enhancerClass = (Class<Enhancer>) Class.forName(Enhancer.class.getName(), true, urlClassLoader);
 //            return enhancerClass.newInstance();
 //        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | MalformedURLException e) {
 //            e.printStackTrace();
+//            return new Enhancer();
 //        }
         return new Enhancer();
     }

@@ -24,7 +24,12 @@ public class Routes extends RouteBuilder {
             );
 
         from("jetty:http://localhost:8080/")
+            .process(exchange -> {
+                exchange.getOut().setBody("<html><body>Book 123 is Camel in Action</body></html>");
+            })
             .setProperty("1", constant(1))
+            .setProperty( "-1" )
+            .xquery( "local-name(//*[ends-with(local-name(), 'body')])", String.class )
             .setHeader("hi", constant("hi"))
             .filter(Exchange::hasProperties)
                 .setProperty("11", constant(11))
@@ -39,9 +44,7 @@ public class Routes extends RouteBuilder {
                 .end()
             .end()
             .to("direct:soutv")
-            .process(exchange -> {
-                exchange.getOut().setBody("<html><body>Book 123 is Camel in Action</body></html>");
-            })
+
             .end();
 
         from("direct:soutv").id("soutv_id")
