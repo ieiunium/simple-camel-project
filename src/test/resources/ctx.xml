@@ -20,9 +20,19 @@
 
     <beans:bean class="by.kir.scp.Routes"/>
 
-    <beans:bean class = "by.kir.scp.MyBeanPostProcessor" />
-    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+    <!--<beans:bean class = "by.kir.scp.MyBeanPostProcessor" />-->
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring" trace="false">
         <contextScan />
+        <route>
+            <from uri="jetty:http://localhost:8080/"/>
+            <setProperty propertyName="h">
+                <constant>hello</constant>
+            </setProperty>
+            <setBody>
+                <constant>hello</constant>
+            </setBody>
+            <to uri="file:///tmp/out"/>
+        </route>
     </camelContext>
 
 </beans:beans>
